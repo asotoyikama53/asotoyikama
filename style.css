@@ -56,3 +56,16 @@ footer{text-align:center;color:#555;padding:18px}
 .lb-prev{top:50%;left:12px;transform:translateY(-50%)}
 .lb-next{top:50%;right:12px;transform:translateY(-50%)}
 .lb-close:hover,.lb-prev:hover,.lb-next:hover{background:rgba(0,0,0,.65)}
+/* Pager */
+.pager{
+  display:flex; align-items:center; justify-content:center;
+  gap:.6rem; margin-top:.6rem;
+}
+.pg-btn{
+  background:#eee; border:1px solid #ddd; padding:.45rem .75rem;
+  border-radius:10px; cursor:pointer; font-weight:700;
+}
+.pg-btn:hover{ background:#e6e6e6 }
+.pg-btn:disabled{ opacity:.5; cursor:not-allowed }
+.pg-info{ color:var(--muted); min-width:64px; text-align:center; font-weight:700 }
+
