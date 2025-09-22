@@ -1,10 +1,15 @@
-/* ============ Repo bilgilerini KENDİ repona göre ayarla ============ */
+/* ============ Ayarlar ============ */
 const GH_OWNER  = "asotoyikama53";
 const GH_REPO   = "asotoyikama";
 const GH_BRANCH = "main";
 const IMAGES_DIR = "images";
 
-/* ===== Lightbox ===== */
+/* ---- Sayfalama ---- */
+const PAGE_SIZE = 6;          // <<< her sayfada 6 foto
+let currentPage = 0;
+let totalPages = 1;
+
+/* ===== Lightbox (değişmedi) ===== */
 const lb = document.querySelector('.lightbox');
 const lbImg = document.querySelector('.lb-img');
 const btnClose = document.querySelector('.lb-close');
@@ -28,7 +33,38 @@ window.addEventListener('keydown', e=>{
   if(e.key==='ArrowRight') step(1);
 });
 
-/* ============ Galeriyi GitHub Contents API ile otomatik oluştur ============ */
+/* ---- Grid'e bir sayfanın içeriğini bas ---- */
+function renderPage(page){
+  const grid = document.getElementById('gallery-grid');
+  const pgPrev = document.getElementById('pg-prev');
+  const pgNext = document.getElementById('pg-next');
+  const pgInfo = document.getElementById('pg-info');
+
+  currentPage = Math.max(0, Math.min(page, totalPages-1));
+  const start = currentPage * PAGE_SIZE;
+  const end   = Math.min(start + PAGE_SIZE, GALLERY.length);
+  const slice = GALLERY.slice(start, end);
+
+  grid.innerHTML = "";
+  slice.forEach((img, i) => {
+    const el = document.createElement('img');
+    el.className = 'thumb';
+    el.loading = 'lazy';
+    el.decoding = 'async';
+    el.src = img.src;
+    el.alt = img.alt;
+    // Lightbox için tüm listedeki gerçek indexi gönder
+    el.addEventListener('click', ()=>openLB(start + i));
+    grid.appendChild(el);
+  });
+
+  // Pager durumu
+  pgInfo.textContent = `${currentPage+1} / ${totalPages}`;
+  pgPrev.disabled = currentPage === 0;
+  pgNext.disabled = currentPage >= totalPages - 1;
+}
+
+/* ---- Galeriyi API'den çek ve sayfalamayı hazırla ---- */
 async function buildGallery(){
   const grid = document.getElementById('gallery-grid');
   grid.innerHTML = '<div class="muted">Fotoğraflar yükleniyor…</div>';
@@ -43,7 +79,6 @@ async function buildGallery(){
     const exts = ['.jpg','.jpeg','.png','.webp','.gif','.JPG','.JPEG','.PNG','.WEBP','.GIF'];
     const imgs = files.filter(f => f.type==='file' && exts.some(ext => f.name.endsWith(ext)));
 
-    // shop.jpg'i ilk sıraya al; diğerlerini ada göre sırala
     imgs.sort((a,b)=>{
       const A=a.name.toLowerCase(), B=b.name.toLowerCase();
       if(A==='shop.jpg') return -1;
@@ -51,43 +86,24 @@ async function buildGallery(){
       return A.localeCompare(B,'tr');
     });
 
-    // Görsel URL (CDN önerilir)
     const toUrl = name => `https://cdn.jsdelivr.net/gh/${GH_OWNER}/${GH_REPO}@${GH_BRANCH}/${IMAGES_DIR}/${encodeURIComponent(name)}`;
-
     GALLERY = imgs.map(f => ({ src: toUrl(f.name), alt: f.name.replace(/\.[^.]+$/,'').replace(/[-_]/g,' ') }));
 
-    grid.innerHTML = '';
-    GALLERY.forEach((img, i) => {
-      const el = document.createElement('img');
-      el.className = 'thumb';
-      el.loading = 'lazy';
-      el.decoding = 'async';
-      el.src = img.src;
-      el.alt = img.alt;
-      el.addEventListener('click', ()=>openLB(i));
-      grid.appendChild(el);
-    });
+    totalPages = Math.max(1, Math.ceil(GALLERY.length / PAGE_SIZE));
 
-    if(!GALLERY.length){
-      grid.innerHTML = '<div class="muted">images/ klasöründe görsel bulunamadı.</div>';
-    }
+    // Pager butonları bağla (bir kez)
+    const pgPrev = document.getElementById('pg-prev');
+    const pgNext = document.getElementById('pg-next');
+    pgPrev.onclick = ()=> renderPage(currentPage - 1);
+    pgNext.onclick = ()=> renderPage(currentPage + 1);
+
+    renderPage(0);
   }catch(err){
     console.error(err);
-    // Hata olursa en azından shop.jpg’i göster
-    const fallback = `${IMAGES_DIR}/shop.jpg`;
-    GALLERY = [{src:fallback, alt:'Dükkan'}];
-    grid.innerHTML = '';
-    const el = document.createElement('img');
-    el.className = 'thumb';
-    el.src = fallback;
-    el.alt = 'Dükkan';
-    el.addEventListener('click', ()=>openLB(0));
-    grid.appendChild(el);
-
-    const warn = document.createElement('div');
-    warn.className = 'muted';
-    warn.textContent = 'Not: GitHub API sınırı nedeniyle tüm fotoğraflar listelenemedi.';
-    grid.appendChild(warn);
+    // Yedek: en azından shop.jpg'i göster
+    GALLERY = [{src:`${IMAGES_DIR}/shop.jpg`, alt:'Dükkan'}];
+    totalPages = 1;
+    renderPage(0);
   }
 }
 
