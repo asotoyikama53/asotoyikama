@@ -1,20 +1,30 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>As Oto Yıkama – Motor Servisi</title>
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css"/>
 </head>
 <body>
 
-<header>
+<header class="site-header">
   <h1>As Oto Yıkama &amp; Motor Servisi</h1>
   <p>Eminettin, Atatürk Cd. 191A, 53020 Rize Merkez/Rize</p>
 </header>
 
-<section class="hero">
-  <img src="images/shop.jpg" alt="As Oto Yıkama & Motor Servisi Fotoğrafı">
+<!-- GALERİ / HERO -->
+<section class="hero-gallery" aria-label="Fotoğraf Galerisi">
+  <button class="nav prev" aria-label="Önceki">&#10094;</button>
+  <div class="slides">
+    <!-- Buraya istediğin kadar <figure> ekleyebilirsin -->
+    <figure class="slide active"><img src="images/shop.jpg" alt="Dükkan ön cephesi" loading="eager"></figure>
+    <figure class="slide"><img src="images/img-2.jpg" alt="Örnek çalışma 1" loading="lazy"></figure>
+    <figure class="slide"><img src="images/img-3.jpg" alt="Örnek çalışma 2" loading="lazy"></figure>
+  </div>
+  <button class="nav next" aria-label="Sonraki">&#10095;</button>
+
+  <div class="dots" role="tablist" aria-label="Galeri noktaları"></div>
 </section>
 
 <section class="info">
@@ -30,20 +40,23 @@
     <li>📞 0531 871 74 00</li>
     <li>✉️ <a href="mailto:asotoyikama53@gmail.com">asotoyikama53@gmail.com</a></li>
   </ul>
-
-  <p>
-    <a class="button" href="https://www.instagram.com/as_otoyikama/" target="_blank">Instagram</a>
-    <a class="button" href="https://www.facebook.com/share/1as4Pd8qJ7/" target="_blank">Facebook</a>
-  </p>
-
-  <p>
-    <a class="button" href="https://maps.app.goo.gl/kmMLFVk9RzNKwiis9?g_st=aw" target="_blank">Konum / Yol Tarifi</a>
+  <p class="btn-row">
+    <a class="button" href="https://www.instagram.com/as_otoyikama/" target="_blank" rel="noopener">Instagram</a>
+    <a class="button" href="https://www.facebook.com/share/1as4Pd8qJ7/" target="_blank" rel="noopener">Facebook</a>
+    <a class="button" href="https://maps.app.goo.gl/kmMLFVk9RzNKwiis9?g_st=aw" target="_blank" rel="noopener">Konum / Yol Tarifi</a>
   </p>
 </section>
 
-<footer>
-  &copy; 2025 As Oto Yıkama &amp; Motor Servisi
-</footer>
+<footer>&copy; 2025 As Oto Yıkama &amp; Motor Servisi</footer>
 
+<!-- LIGHTBOX (tam ekran) -->
+<div class="lightbox" aria-hidden="true">
+  <button class="lb-close" aria-label="Kapat">&times;</button>
+  <button class="lb-prev" aria-label="Önceki">&#10094;</button>
+  <img class="lb-img" alt="">
+  <button class="lb-next" aria-label="Sonraki">&#10095;</button>
+</div>
+
+<script src="script.js"></script>
 </body>
 </html>
