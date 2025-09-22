@@ -10,31 +10,43 @@
 
 <header class="site-header">
   <h1>As Oto Yıkama &amp; Motor Servisi</h1>
-  <p>Eminettin, Atatürk Cd. 191A, 53020 Rize Merkez/Rize</p>
 </header>
 
-<!-- GALERİ / HERO -->
-<section class="hero-gallery" aria-label="Fotoğraf Galerisi">
-  <button class="nav prev" aria-label="Önceki">&#10094;</button>
-  <div class="slides">
-    <!-- Buraya istediğin kadar <figure> ekleyebilirsin -->
-    <figure class="slide active"><img src="images/shop.jpg" alt="Dükkan ön cephesi" loading="eager"></figure>
-    <figure class="slide"><img src="images/img-2.jpg" alt="Örnek çalışma 1" loading="lazy"></figure>
-    <figure class="slide"><img src="images/img-3.jpg" alt="Örnek çalışma 2" loading="lazy"></figure>
+<!-- HERO BANNER (arka plan: shop.jpg) -->
+<section class="hero-banner">
+  <div class="hero-overlay">
+    <h2>Rize’de Oto Yıkama &amp; Motosiklet Servisi</h2>
+    <p class="addr">Eminettin, Atatürk Cd. 191A, 53020 Rize Merkez/Rize</p>
+    <div class="hero-btns">
+      <a class="button" href="tel:+905358304860">Ara: 0535 830 48 60</a>
+      <a class="button" href="tel:+905318717400">Ara: 0531 871 74 00</a>
+      <a class="button ghost" href="https://maps.app.goo.gl/kmMLFVk9RzNKwiis9?g_st=aw" target="_blank" rel="noopener">Konum</a>
+    </div>
   </div>
-  <button class="nav next" aria-label="Sonraki">&#10095;</button>
-
-  <div class="dots" role="tablist" aria-label="Galeri noktaları"></div>
 </section>
 
-<section class="info">
-  <h2>Çalışma Saatleri</h2>
+<!-- KÜÇÜK GÖRSELLİ GALERİ -->
+<section class="gallery" aria-label="Fotoğraf Galerisi">
+  <h3>Galeri</h3>
+  <div class="grid">
+    <!-- shop.jpg’i istersen küçüklerde de gösterebiliriz -->
+    <img src="images/shop.jpg" alt="Dükkan" class="thumb" data-full="images/shop.jpg">
+    <img src="images/img-1.jpg" alt="" class="thumb" data-full="images/img-1.jpg">
+    <img src="images/img-2.jpg" alt="" class="thumb" data-full="images/img-2.jpg">
+    <img src="images/img-3.jpg" alt="" class="thumb" data-full="images/img-3.jpg">
+
+    <!-- yeni foto ekledikçe aynı satırı kopyala -->
+  </div>
+</section>
+
+<section class="info card">
+  <h3>Çalışma Saatleri</h3>
   <p>Pazartesi ‒ Cumartesi: 08:00 ‒ 20:00</p>
   <p>Pazar: 09:00 ‒ 19:00</p>
 </section>
 
-<section class="contact">
-  <h2>İletişim</h2>
+<section class="contact card">
+  <h3>İletişim</h3>
   <ul>
     <li>📞 0535 830 48 60</li>
     <li>📞 0531 871 74 00</li>
@@ -43,13 +55,12 @@
   <p class="btn-row">
     <a class="button" href="https://www.instagram.com/as_otoyikama/" target="_blank" rel="noopener">Instagram</a>
     <a class="button" href="https://www.facebook.com/share/1as4Pd8qJ7/" target="_blank" rel="noopener">Facebook</a>
-    <a class="button" href="https://maps.app.goo.gl/kmMLFVk9RzNKwiis9?g_st=aw" target="_blank" rel="noopener">Konum / Yol Tarifi</a>
   </p>
 </section>
 
 <footer>&copy; 2025 As Oto Yıkama &amp; Motor Servisi</footer>
 
-<!-- LIGHTBOX (tam ekran) -->
+<!-- LIGHTBOX -->
 <div class="lightbox" aria-hidden="true">
   <button class="lb-close" aria-label="Kapat">&times;</button>
   <button class="lb-prev" aria-label="Önceki">&#10094;</button>
