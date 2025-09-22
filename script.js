@@ -60,7 +60,8 @@ async function buildGallery() {
     const images = files.filter(f => f.type === 'file' && exts.some(ext => f.name.endsWith(ext)));
 
     // Ham içerik URL’si (cdn de kullanılabilir: https://cdn.jsdelivr.net/gh/OWNER/REPO@BRANCH/path)
-    const toRaw = name => `https://raw.githubusercontent.com/${GH_OWNER}/${GH_REPO}/${GH_BRANCH}/${IMAGES_DIR}/${encodeURIComponent(name)}`;
+const toRaw = name =>
+  `https://cdn.jsdelivr.net/gh/${GH_OWNER}/${GH_REPO}@${GH_BRANCH}/${IMAGES_DIR}/${encodeURIComponent(name)}`;
 
     // shop.jpg’i ilk sıraya almak istersen:
     images.sort((a,b)=>{
