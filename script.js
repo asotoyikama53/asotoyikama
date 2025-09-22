@@ -5,7 +5,7 @@ const GH_BRANCH = "main";
 const IMAGES_DIR = "images";
 
 /* ---- Sayfalama ---- */
-const PAGE_SIZE = 6;          // <<< her sayfada 6 foto
+const PAGE_SIZE = 12;          // <<< her sayfada 6 foto
 let currentPage = 0;
 let totalPages = 1;
 
