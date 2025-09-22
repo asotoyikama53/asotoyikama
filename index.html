@@ -1,62 +1,142 @@
 <!DOCTYPE html>
 <html lang="tr">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>As Oto Yıkama – Motor Servisi</title>
-  <link rel="stylesheet" href="style.css"/>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>As Oto Yıkama – Motor Servisi</title>
+<style>
+  :root{
+    --brand:#c62828;         /* ana renk (bir tık koyu kırmızı) */
+    --text:#222;
+    --muted:#666;
+    --radius:12px;
+    --container:1040px;
+  }
+  *{box-sizing:border-box}
+  html,body{margin:0;padding:0}
+  body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;color:var(--text);background:#f7f7f8}
+
+  /* Üst şerit */
+  .topbar{
+    background:var(--brand);color:#fff;text-align:center;
+    padding:.9rem .75rem;font-weight:700;letter-spacing:.3px
+  }
+
+  /* Hero (shop.jpg arka plan, kısa tutuyoruz) */
+  .hero{
+    height:38vh; min-height:260px; max-height:420px;
+    position:relative; background:url("images/shop.jpg") center/cover no-repeat;
+    display:grid; place-items:center; padding:1rem;
+  }
+  .hero::after{
+    content:""; position:absolute; inset:0;
+    background:linear-gradient(180deg,rgba(0,0,0,.55),rgba(0,0,0,.35));
+  }
+  .hero .box{
+    position:relative; z-index:1; text-align:center; color:#fff;
+    padding:1rem 1.2rem; border-radius:var(--radius);
+    backdrop-filter:saturate(120%) blur(2px);
+  }
+  .hero h2{margin:.2rem 0 .4rem; font-size: clamp(20px,3.2vw,28px); font-weight:800}
+  .addr{margin:0 0 .7rem; color:#fff; opacity:.95}
+  .btns{display:flex; gap:.5rem; flex-wrap:wrap; justify-content:center}
+  .btn{display:inline-block; padding:.55rem .9rem; border-radius:10px;
+       background:#ffffff; color:var(--brand); text-decoration:none; font-weight:700}
+  .btn.ghost{background:transparent; color:#fff; border:1.6px solid #fff}
+
+  /* İçerik kapları */
+  .container{max-width:var(--container); margin:0 auto; padding:0 16px}
+  .card{background:#fff; border-radius:var(--radius); box-shadow:0 8px 24px rgba(0,0,0,.06); padding:1.1rem 1rem}
+  h3{margin:.2rem 0 .7rem}
+
+  /* Küçük galeri grid */
+  .gallery{margin:16px auto}
+  .grid{
+    display:grid; gap:10px;
+    grid-template-columns:repeat(auto-fill,minmax(140px,1fr));
+  }
+  .thumb{
+    width:100%; aspect-ratio:4/3; object-fit:cover; border-radius:10px;
+    cursor:pointer; background:#ddd; box-shadow:0 4px 12px rgba(0,0,0,.08);
+    transition:transform .12s ease, box-shadow .12s ease;
+  }
+  .thumb:hover{transform:translateY(-1px); box-shadow:0 8px 18px rgba(0,0,0,.12)}
+
+  /* Bilgi & iletişim */
+  .info p{margin:.25rem 0}
+  .muted{color:var(--muted)}
+  .contact ul{list-style:none; padding:0; margin:.2rem 0 .8rem}
+  .contact li{margin:.25rem 0; font-size:1.05rem}
+  .pillrow{display:flex; gap:.5rem; flex-wrap:wrap}
+
+  /* Alt */
+  footer{color:#555;text-align:center;padding:18px}
+
+  /* Lightbox (tam ekran görüntüleyici) */
+  .lightbox{position:fixed; inset:0; background:rgba(0,0,0,.92);
+            display:none; align-items:center; justify-content:center; z-index:9999}
+  .lightbox.open{display:flex}
+  .lb-img{max-width:95vw; max-height:92vh; object-fit:contain}
+  .lb-close,.lb-prev,.lb-next{
+    position:absolute; background:rgba(0,0,0,.4); color:#fff;
+    border:none; cursor:pointer; border-radius:10px; padding:.35rem .6rem; font-size:28px
+  }
+  .lb-close{top:10px; right:12px}
+  .lb-prev{top:50%; left:12px; transform:translateY(-50%)}
+  .lb-next{top:50%; right:12px; transform:translateY(-50%)}
+  .lb-close:hover,.lb-prev:hover,.lb-next:hover{background:rgba(0,0,0,.65)}
+</style>
 </head>
 <body>
 
-<header class="site-header">
-  <h1>As Oto Yıkama &amp; Motor Servisi</h1>
-</header>
+<div class="topbar">As Oto Yıkama &amp; Motor Servisi</div>
 
-<!-- HERO BANNER (arka plan: shop.jpg) -->
-<section class="hero-banner">
-  <div class="hero-overlay">
+<section class="hero">
+  <div class="box">
     <h2>Rize’de Oto Yıkama &amp; Motosiklet Servisi</h2>
     <p class="addr">Eminettin, Atatürk Cd. 191A, 53020 Rize Merkez/Rize</p>
-    <div class="hero-btns">
-      <a class="button" href="tel:+905358304860">Ara: 0535 830 48 60</a>
-      <a class="button" href="tel:+905318717400">Ara: 0531 871 74 00</a>
-      <a class="button ghost" href="https://maps.app.goo.gl/kmMLFVk9RzNKwiis9?g_st=aw" target="_blank" rel="noopener">Konum</a>
+    <div class="btns">
+      <a class="btn" href="tel:+905358304860">Ara: 0535 830 48 60</a>
+      <a class="btn" href="tel:+905318717400">Ara: 0531 871 74 00</a>
+      <a class="btn ghost" href="https://maps.app.goo.gl/kmMLFVk9RzNKwiis9?g_st=aw" target="_blank" rel="noopener">Konum</a>
     </div>
   </div>
 </section>
 
-<!-- KÜÇÜK GÖRSELLİ GALERİ -->
-<section class="gallery" aria-label="Fotoğraf Galerisi">
-  <h3>Galeri</h3>
-  <div class="grid">
-    <!-- shop.jpg’i istersen küçüklerde de gösterebiliriz -->
-    <img src="images/shop.jpg" alt="Dükkan" class="thumb" data-full="images/shop.jpg">
-    <img src="images/img-1.jpg" alt="" class="thumb" data-full="images/img-1.jpg">
-    <img src="images/img-2.jpg" alt="" class="thumb" data-full="images/img-2.jpg">
-    <img src="images/img-3.jpg" alt="" class="thumb" data-full="images/img-3.jpg">
+<div class="container">
+  <!-- GALERİ (küçük kutucuklar) -->
+  <section class="gallery card">
+    <h3>Galeri</h3>
+    <div class="grid">
+      <img class="thumb" src="images/shop.jpg" alt="Dükkan" data-full="images/shop.jpg">
+      <img class="thumb" src="images/img-2.jpg" alt="Çalışma 1" data-full="images/img-2.jpg">
+      <img class="thumb" src="images/img-3.jpg" alt="Çalışma 2" data-full="images/img-3.jpg">
+      <!-- yeni foto: aynı satırı kopyalayıp src yolunu değiştir -->
+    </div>
+    <p class="muted" style="margin-top:.6rem">Daha fazla foto eklemek için <code>images/</code> klasörüne at, yukarıdaki satırı çoğalt.</p>
+  </section>
 
-    <!-- yeni foto ekledikçe aynı satırı kopyala -->
-  </div>
-</section>
+  <!-- Çalışma saatleri -->
+  <section class="info card">
+    <h3>Çalışma Saatleri</h3>
+    <p>Pazartesi ‒ Cumartesi: <b>08:00 ‒ 20:00</b></p>
+    <p>Pazar: <b>09:00 ‒ 19:00</b></p>
+  </section>
 
-<section class="info card">
-  <h3>Çalışma Saatleri</h3>
-  <p>Pazartesi ‒ Cumartesi: 08:00 ‒ 20:00</p>
-  <p>Pazar: 09:00 ‒ 19:00</p>
-</section>
-
-<section class="contact card">
-  <h3>İletişim</h3>
-  <ul>
-    <li>📞 0535 830 48 60</li>
-    <li>📞 0531 871 74 00</li>
-    <li>✉️ <a href="mailto:asotoyikama53@gmail.com">asotoyikama53@gmail.com</a></li>
-  </ul>
-  <p class="btn-row">
-    <a class="button" href="https://www.instagram.com/as_otoyikama/" target="_blank" rel="noopener">Instagram</a>
-    <a class="button" href="https://www.facebook.com/share/1as4Pd8qJ7/" target="_blank" rel="noopener">Facebook</a>
-  </p>
-</section>
+  <!-- İletişim -->
+  <section class="contact card">
+    <h3>İletişim</h3>
+    <ul>
+      <li>📞 0535 830 48 60</li>
+      <li>📞 0531 871 74 00</li>
+      <li>✉️ <a href="mailto:asotoyikama53@gmail.com">asotoyikama53@gmail.com</a></li>
+    </ul>
+    <div class="pillrow">
+      <a class="btn" style="background:#111;color:#fff" href="https://www.instagram.com/as_otoyikama/" target="_blank" rel="noopener">Instagram</a>
+      <a class="btn" style="background:#1877f2;color:#fff" href="https://www.facebook.com/share/1as4Pd8qJ7/" target="_blank" rel="noopener">Facebook</a>
+    </div>
+  </section>
+</div>
 
 <footer>&copy; 2025 As Oto Yıkama &amp; Motor Servisi</footer>
 
@@ -68,6 +148,24 @@
   <button class="lb-next" aria-label="Sonraki">&#10095;</button>
 </div>
 
-<script src="script.js"></script>
+<script>
+  // küçük resimlerden tam ekrana geçiş
+  const thumbs=[...document.querySelectorAll('.thumb')];
+  const lb=document.querySelector('.lightbox');
+  const lbImg=document.querySelector('.lb-img');
+  const btnC=document.querySelector('.lb-close');
+  const btnP=document.querySelector('.lb-prev');
+  const btnN=document.querySelector('.lb-next');
+  let i=0;
+  function openLB(k){ i=k; const t=thumbs[i]; lbImg.src=t.dataset.full||t.src; lbImg.alt=t.alt||""; lb.classList.add('open'); lb.setAttribute('aria-hidden','false'); }
+  function closeLB(){ lb.classList.remove('open'); lb.setAttribute('aria-hidden','true'); }
+  function step(d){ i=(i+d+thumbs.length)%thumbs.length; const t=thumbs[i]; lbImg.src=t.dataset.full||t.src; lbImg.alt=t.alt||""; }
+  thumbs.forEach((t,idx)=>t.addEventListener('click',()=>openLB(idx)));
+  btnC.addEventListener('click',closeLB);
+  btnP.addEventListener('click',()=>step(-1));
+  btnN.addEventListener('click',()=>step(1));
+  lb.addEventListener('click',e=>{ if(e.target===lb) closeLB(); });
+  window.addEventListener('keydown',e=>{ if(e.key==='Escape') closeLB(); if(!lb.classList.contains('open')) return; if(e.key==='ArrowLeft') step(-1); if(e.key==='ArrowRight') step(1); });
+</script>
 </body>
 </html>
