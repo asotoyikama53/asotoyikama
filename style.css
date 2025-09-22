@@ -17,7 +17,20 @@ header {
   height: auto;
   display: block;
 }
+.info {
+  padding: 1.5rem 1rem;
+  background: #fff;
+  text-align: center;
+}
 
+.info h2 {
+  margin-bottom: 0.5rem;
+}
+
+.info p {
+  margin: 0.3rem 0;
+  font-size: 1.1rem;
+}
 .contact {
   padding: 2rem 1rem;
   text-align: center;
